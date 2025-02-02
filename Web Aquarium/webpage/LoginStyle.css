@@ -13,7 +13,7 @@ body {
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-} hiii
+}
 
 header {
   position: fixed;
@@ -27,14 +27,18 @@ header {
   z-index: 99;
 }
 
-h2 {
-  background-color: none;
-}
-
 .logo {
   font-size: 2em;
   color: black;
   user-select: none;
+}
+
+.logo img{
+  position: absolute;
+  width: 70px;
+  height: auto;
+  top: 5px;
+  left: 45px;
 }
 
 .navigation a {

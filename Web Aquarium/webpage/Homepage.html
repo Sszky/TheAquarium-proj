@@ -5,28 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Aquarium</title>
     <link rel="stylesheet" href="HomepageStyle.css">
-    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Playfair Display|DM Serif Text">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Playfair Display|DM Serif Text|Patrick Hand">
 </head>
 
 <body>
     <header>
-        <a href="/webpage/StartChat.html" class="logo">
-            <img  src="/logo/Logo (1).png">
-        </a>
+        <a href="Homepage.html" class="logo"><img src="C:\TheAquarium\webpage\artworks\Whale.gif"></img></a>
         <nav class="navigation">
-            <a href="/webpage/StartChat.html">Home</a>
+            <a href="#">Home</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
-            <a href="/webpage/LoginPage.html" class="Login-popup">Log In</a>
+            <button class="Login-popup" id="login-popup">Login</button>
         </nav>
     </header>
     
-    <nav class="data">
-        <img src="/logo/Name.png"></img>
-        <div class="container">
-            <div class="box instructure">
+    <nav class="data" id="data">
+        <img src="C:\TheAquarium\webpage\artworks\Name.png"></img>
+        <div class="home-heading">
+            <div class="boxinstructure">
                 <h2>Instructure</h2>
-                <p>Welcome to The Aquarium! This website was designed to address loneliness and cerate among Khon Kaen University Students
+                <p>     Welcome to The Aquarium! This website was designed to address loneliness and cerate among Khon Kaen University Students
                 by providing a space for meeting new friends with shared interests, 
                 connectingstudents across different faculties, offering diverse character systems 
                 to make conversations more enjoyable, and meeting students nedds in 
@@ -36,10 +34,61 @@
             </div>
             <div class="box">
                 <h2>How To Use</h2>
-                <p>Can't use now.</p>
+                <p>1. Log In – First things first, log in to dive into the Aquarium meet-ups! Don’t have an account? No worries—just sign up! 🐟</p>
+                <p>2. Create Your Profile – Set up your profile so your friends (and new fish-loving buddies) can find you! 🐡</p>
+                <p>3. Choose Your Interests – Love saltwater tanks? Obsessed with betta fish? Pick your interests so you can find people who share your passion! 🎯🐠</p>
+                <p>4. Start Chatting – Ready to talk all things aquariums? Jump into chats with your friends and share your favorite fishy moments! 💬🐠</p>
+                <P>5. Find Friends – Looking for someone? Just search their name and connect instantly! 🌟</P>
+                <p>6. Join Meet-Ups – Check out upcoming aquarium meet-ups and join in on the fun! Whether online or in person, it’s a great way to meet fellow aquarium lovers. 🌊✨</p>
+                <p>7. Have Fun! – Chat, share, and make new friends who love aquariums as much as you do. Enjoy the experience! 🐠💙</p>
             </div>
         </div>
     </nav>
+
+    <div class="container" id="container">
+      <div class="form-container sign-up">
+        <form id="signupForm">
+          <h1>Registeration</h1>
+          <span>Create an account with your kkumail.</span>
+          <input type="text" placeholder="Username">
+          <!-- เพิ่ม id email เพื่อจะอ้างอิง -->
+          <input type="email" id="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <p id="error-message" style="color: red; display: none;">ใส่ kkumail เด้ออ</p>
+          <!-- แก้ ใส่ Type submit -->
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      
+      <div class="form-container sign-in">
+        <form>
+          <h1>Log In</h1>
+          <span>Sign in with your kkumail account.</span>
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <a href="#">Forget Your Passsword?</a>
+          <button>Sign In</button>
+        </form>
+      </div>
+  
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Welcome Back!</h1>
+            <p>Enter your personal details to use all of site features</p>
+            <button class="hidden" id="login">Sign In</button>
+          </div>
+  
+          <div class="toggle-panel toggle-right">
+            <h1>Hello, Friend!</h1>
+            <p>Register with your personal details to use all of site features</p>
+            <button class="hidden" id="register">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="Loginjs.js"></script>
 </body>
 
 </html>

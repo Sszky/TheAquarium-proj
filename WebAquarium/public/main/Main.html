@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aquarium Interaction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="indexmain.css" />
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="#"><img src="../logo/Logo (1).png" alt="Whale Logo" class="nav-logo" /></a>
+    <a href="#"><img src="../logo/Profile.png" alt="Fish Icon" class="nav-icon" /></a>
+  </nav>
+
+  <div class="container">
+    <div class="left-section">
+      <h1 class="title">AQUA<br />RIUM</h1>
+      <div class="intro">
+        <p class="handlee text-xl">
+          Hello, I'm <input type="text" placeholder="Your name" class="name-input" />
+        </p>
+      </div>
+
+      <!-- New Character Display Screen -->
+      <div class="character-display">
+        <img id="selectedCharacter" src="../logo/Jellypic.png" alt="Selected Character" class="selected-character" />
+      </div>
+
+      <div class="character-bar">
+        <img src="../logo/Jellypic.png" data-hover-src="../logo/Jelly.gif" alt="Jellyfish" class="character-icon"
+          data-character="jellyfish" />
+        <img src="../logo/Whalepic .png" data-hover-src="../logo/Whale.gif" alt="Dolphin" class="character-icon"
+          data-character="dolphin" />
+        <img src="../logo/Turtlepic .png" data-hover-src="../logo/Turtle.gif" alt="Turtle" class="character-icon"
+          data-character="turtle" />
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+      <div class="card">
+        <div class="tabs">
+          <button id="swimTab" class="tab tab-active">SWIM</button>
+          <button id="tagTab" class="tab">TAG</button>
+        </div>
+
+        <!-- Swim Content -->
+        <div id="swimContent" class="content">
+          <img src="../logo/Untitled_Artwork.png" class="content-img" />
+          <p class="content-text">
+            Do you find someone to talk to? If the answer is yes, just click
+            START to start your friendships with someone who you want to.
+          </p>
+          <button id="startButton" class="start-btn">START</button>
+
+            <script>
+              document.getElementById("startButton").addEventListener("click", function() {
+                window.location.href = "../webpage/rtcpage/random.html"; 
+              });
+            </script>
+
+
+        </div>
+
+        <!-- Tag Content -->
+        <!-- Tag Content -->
+        <div id="tagContent" class="content hidden">
+          <p class="content-text">
+            Explore different tags and find people with similar interests!
+          </p>
+
+          <!-- Search bar for tags -->
+          <div class="tag-search mb-3">
+            <input type="text" id="tagSearchInput" placeholder="Search for tags..."
+              class="w-full p-2 rounded-full border-2 border-gray-300 focus:outline-none focus:border-blue-400" />
+            <button id="addTagButton" class="ml-2 mt-2 bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Add
+              Tag</button>
+          </div>
+
+          <!-- Selected tags display -->
+          <div class="selected-tags-container mb-3">
+            <p class="text-sm mb-1">Your selected tags:</p>
+            <div id="selectedTags" class="flex flex-wrap"></div>
+          </div>
+
+          <!-- Suggested tags -->
+          <div class="suggested-tags-container">
+            <p class="text-sm mb-1">Suggested tags:</p>
+            <div class="tag-selection flex flex-wrap">
+              <span class="tag-item">#friendship</span>
+              <span class="tag-item">#aquarium</span>
+              <span class="tag-item">#dance</span>
+              <span class="tag-item">#kpop</span>
+              <span class="tag-item">#band</span>
+              <span class="tag-item">#coding</span>
+              <span class="tag-item">#english</span>
+              <span class="tag-item">#random</span>
+            </div>
+          </div>
+
+          <button id="savetagbutton" class="start-btn mt-4">Save</button>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="mainscript.js"></script>
+</body>
+
+</html>

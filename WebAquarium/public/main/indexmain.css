@@ -1,0 +1,344 @@
+/* General */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, #ffffff, #78a7d4);
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.nav-logo {
+  width: 150px;
+  height: 120px;
+}
+
+.nav-icon {
+  width: 100px;
+}
+
+.handlee{
+  margin-left: -48px;
+  font-size: 1.5rem;
+  font-style: bold;
+}
+
+.name-input{
+  font-size: 1.4rem;
+  margin-top: -10px;
+  background-color: transparent;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(100vh - 100px);
+  padding: 0 10%;
+}
+
+/* Left Section */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 300px;
+}
+
+.title {
+  font-size: 5.5rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: -100px;
+  margin-left: -50px;
+  padding-bottom: 5px;
+}
+
+.intro {
+  margin: 20px 0;
+}
+
+.name-input {
+  border-bottom: 2px solid black;
+  width: 200px;
+  text-align: center;
+  outline: none;
+  font-size: 1rem;
+  padding: 5px;
+  margin-left: 10px;
+  font-family: "Handlee", cursive;
+}
+
+/* Character Icons Bar */
+.character-bar {
+  display: flex;
+  gap: 20px;
+  width: 400px;
+  height: 110px;
+  background: #e0eaf6;
+  border-radius: 50px;
+  padding: 15px 30px;
+  margin-left: -105px;
+}
+
+/* Add this to your CSS file */
+
+/* Character Display Screen */
+.character-display {
+  width: 300px;
+  height: 200px;
+  background-color: #e0eaf6;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Add hover state images */
+.character-icon {
+  width: 100px;
+  height: 90px;
+  object-fit: cover;
+  transition: transform 0.3s;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+.character-icon:hover {
+  transform: scale(1.2);
+}
+
+.selected-character {
+  width: 150px; /* Adjust as needed */
+  height: 150px;
+  object-fit: contain; /* Ensures image scales correctly */
+  border-radius: 10px; /* Optional: Rounds the corners */
+  display: block;
+  margin: auto;
+}
+
+
+/* Right Section */
+.right-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: -70px;
+}
+
+.card {
+  width: 350px;
+  height: 500px;
+  z-index: 1;
+  background-color: #272A7B;
+  color: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+  position: relative;
+  z-index: 999;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0px;
+  position: relative;
+  top: -64px;
+  right: 20px;
+}
+
+#swimTab {
+  background-color: #8391E6;
+  color: white;
+  border: none;
+  padding: 0px 40px;
+  height: 50px;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+  position: relative;
+}
+
+#swimContent{
+  width: 150px;
+  height: auto;
+  margin-top: -60px;
+  margin-left: 80px;
+}
+
+#swimContent img {
+  width: 200px;
+  height: auto;
+}
+
+/* TAG Button */
+#tagTab {
+  background-color: #8391E6;
+  color: white;
+  border: none;
+  padding: 0px 40px;
+  height: 45px;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.tab:hover {
+  background-color: #35469c;
+  color: white;
+}
+
+/* Active Tab Styles */
+#swimTab.tab-active {
+  background-color: #272A7B;
+  color: white;
+  padding: 0px 40px;
+  height: 60px;
+}
+
+#tagTab.tab-active {
+  background-color: #272A7B;
+  color: white;
+  height: 60px;
+}
+
+/* Content */
+.content {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.content-img {
+  align-items: center;
+  width: 250px;
+  height: auto;
+  margin: 0 auto 15px;
+}
+
+.content-text {
+  font-size: 0.9rem;
+  align-self: start;
+  margin-bottom: 12px;
+}
+
+/* Button */
+.start-btn {
+  background-color: #D9D9D9;
+  color: black;
+  border: none;
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.start-btn:hover {
+  background-color: #8391E6;
+  color: white;
+}
+
+#tagContent {
+  position: relative;
+  margin-top: -40px;
+}
+
+#tagSearchInput {
+  color: black;
+  font-weight: 500; /* Optional: make it slightly bolder */
+}
+
+/* Optional: Also make the placeholder text darker */
+#tagSearchInput::placeholder {
+  color: #666;
+}
+
+/* Tag Styles */
+.tag-item {
+  display: inline-block;
+  background-color: #e0eaf6;
+  color: #272A7B;
+  border-radius: 50px;
+  padding: 5px 12px;
+  margin: 0 6px 6px 0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag-item:hover {
+  background-color: #8391E6;
+  color: white;
+}
+
+.selected-tag {
+  background-color: #272A7B;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding-right: 6px;
+}
+
+.selected-tag .remove-tag {
+  margin-left: 5px;
+  width: 16px;
+  height: 16px;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.selected-tag .remove-tag:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.tag-search {
+  position: relative;
+}
+
+#selectedTags {
+  min-height: 30px;
+}
+
+#savebutton{
+  margin-top: 15px;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
+
+.handlee {
+  font-family: "Handlee", cursive;
+}

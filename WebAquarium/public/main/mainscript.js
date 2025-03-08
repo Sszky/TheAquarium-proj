@@ -5,6 +5,14 @@ const swimContent = document.getElementById("swimContent");
 const tagContent = document.getElementById("tagContent");
 const startButton = document.getElementById("startButton");
 
+// Profile Modal Elements
+const profileIcon = document.getElementById("profileIcon");
+const profileModal = document.getElementById("profileModal");
+const closeProfileModal = document.getElementById("closeProfileModal");
+const saveProfileButton = document.getElementById("saveProfileButton");
+const logoutButton = document.getElementById("logoutButton");
+
+// Tab Switching
 swimTab.addEventListener("click", () => {
   swimTab.classList.add("tab-active");
   tagTab.classList.remove("tab-active");
@@ -19,14 +27,37 @@ tagTab.addEventListener("click", () => {
   swimContent.classList.add("hidden");
 });
 
+// Start Button Functionality - just navigate without an alert
 startButton.addEventListener("click", () => {
-  const name = document.querySelector(".name-input").value || "Friend";
-  alert(`Hello ${name}, let's make new friends! 🌊`);
+  // Navigate directly to the random.html page
+  window.location.href = "../webpage/rtcpage/random.html";
 });
 
-// Explore Button Functionality
-document.getElementById("exploreButton")?.addEventListener("click", () => {
-  alert("Exploring tags feature coming soon!");
+// Profile Modal Functionality
+profileIcon.addEventListener("click", () => {
+  profileModal.classList.remove("hidden");
+});
+
+closeProfileModal.addEventListener("click", () => {
+  profileModal.classList.add("hidden");
+});
+
+saveProfileButton.addEventListener("click", () => {
+  const accountName = document.getElementById("account").value;
+  if (accountName.trim() !== "") {
+    alert("Profile saved successfully!");
+    // Here you would typically save the profile data to your backend
+    profileModal.classList.add("hidden");
+  } else {
+    alert("Please enter an account name");
+  }
+});
+
+logoutButton.addEventListener("click", () => {
+  // Add your logout logic here
+  alert("Logged out successfully");
+  // You might want to redirect to a login page or clear session data
+  profileModal.classList.add("hidden");
 });
 
 // Character Selection Functionality
@@ -34,9 +65,11 @@ const characterIcons = document.querySelectorAll(".character-icon");
 const selectedCharacter = document.getElementById("selectedCharacter");
 
 // Set default image initially
-selectedCharacter.src = "/new/Jelly1.gif";
-selectedCharacter.style.width = "150px";  // Set initial size
-selectedCharacter.style.height = "150px";
+if (selectedCharacter) {
+  selectedCharacter.src = "/new/Jelly1.gif";
+  selectedCharacter.style.width = "150px";
+  selectedCharacter.style.height = "150px";
+}
 
 characterIcons.forEach((icon) => {
   icon.dataset.originalSrc = icon.src;
@@ -55,16 +88,18 @@ characterIcons.forEach((icon) => {
     console.log("Character clicked:", icon.dataset.character);
 
     // Set selected character to hover version if available
-    selectedCharacter.src = icon.dataset.hoverSrc || icon.dataset.originalSrc;
-    selectedCharacter.alt = icon.alt;
+    if (selectedCharacter) {
+      selectedCharacter.src = icon.dataset.hoverSrc || icon.dataset.originalSrc;
+      selectedCharacter.alt = icon.alt;
 
-    // Set size dynamically
-    selectedCharacter.style.width = "150px";
-    selectedCharacter.style.height = "150px";
+      // Set size dynamically
+      selectedCharacter.style.width = "150px";
+      selectedCharacter.style.height = "150px";
 
-    // Force reload
-    selectedCharacter.onload = () => console.log("Image loaded successfully");
-    selectedCharacter.onerror = () => console.error("Image failed to load", selectedCharacter.src);
+      // Force reload
+      selectedCharacter.onload = () => console.log("Image loaded successfully");
+      selectedCharacter.onerror = () => console.error("Image failed to load", selectedCharacter.src);
+    }
 
     // Highlight selected character
     characterIcons.forEach((c) => (c.style.border = ""));
@@ -72,25 +107,23 @@ characterIcons.forEach((icon) => {
   });
 });
 
-// Select first character by default when page loads
-document.addEventListener("DOMContentLoaded", () => {
+// Tag Selection Functionality
+document.addEventListener("DOMContentLoaded", function () {
+  // Select first character by default when page loads
   if (characterIcons.length > 0) {
     characterIcons[0].click();
   }
-});
-
-// Tag Selection Functionality
-document.addEventListener("DOMContentLoaded", function () {
+  
   const tagSearchInput = document.getElementById("tagSearchInput");
   const addTagButton = document.getElementById("addTagButton");
   const selectedTagsContainer = document.getElementById("selectedTags");
   const suggestedTags = document.querySelectorAll(".tag-item");
-  const saveButton = document.getElementById("savebutton");
+  const saveButton = document.getElementById("savetagbutton");
 
   let selectedTags = [];
 
   function addTag(tagText) {
-    if (!tagText.trim() || selectedTags.includes(tagText.trim())) return;
+    if (!tagText || !tagText.trim() || selectedTags.includes(tagText.trim())) return;
 
     selectedTags.push(tagText.trim());
 
@@ -110,32 +143,59 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateSaveButton() {
-    saveButton.textContent = selectedTags.length > 0 ? `Explore ${selectedTags.length} Tags` : "Explore Tags";
+    if (saveButton) {
+      saveButton.textContent = selectedTags.length > 0 ? `Explore ${selectedTags.length} Tags` : "Save";
+    }
   }
 
-  addTagButton.addEventListener("click", function () {
-    const tagText = tagSearchInput.value;
-    addTag(tagText.startsWith("#") ? tagText : `#${tagText}`);
-  });
-
-  tagSearchInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
+  if (addTagButton) {
+    addTagButton.addEventListener("click", function () {
       const tagText = tagSearchInput.value;
       addTag(tagText.startsWith("#") ? tagText : `#${tagText}`);
-    }
-  });
-
-  suggestedTags.forEach((tag) => {
-    tag.addEventListener("click", function () {
-      addTag(tag.textContent);
     });
-  });
+  }
 
-  document.getElementById("exploreButton")?.addEventListener("click", function () {
-    if (selectedTags.length > 0) {
-      alert(`Save tag: ${selectedTags.join(", ")}`);
-    } else {
-      alert("Please select at least one tag to explore!");
+  if (tagSearchInput) {
+    tagSearchInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        const tagText = tagSearchInput.value;
+        addTag(tagText.startsWith("#") ? tagText : `#${tagText}`);
+      }
+    });
+  }
+
+  if (suggestedTags) {
+    suggestedTags.forEach((tag) => {
+      tag.addEventListener("click", function () {
+        addTag(tag.textContent);
+      });
+    });
+  }
+
+  if (saveButton) {
+    saveButton.addEventListener("click", function () {
+      if (selectedTags.length > 0) {
+        alert(`Tags saved: ${selectedTags.join(", ")}`);
+        // Here you could add code to store the tags or navigate to another page
+      } else {
+        alert("Please select at least one tag to save!");
+      }
+    });
+  }
+  
+  // Close profile modal when clicking outside of it
+  window.addEventListener("click", (event) => {
+    if (event.target === profileModal) {
+      profileModal.classList.add("hidden");
     }
   });
+
+  profileIcon.addEventListener("click", () => {
+    profileModal.classList.remove("hidden");
+  });
+  
+  closeProfileModal.addEventListener("click", () => {
+    profileModal.classList.add("hidden");
+  });
+  
 });

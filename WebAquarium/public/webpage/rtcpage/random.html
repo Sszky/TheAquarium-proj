@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>กำลังค้นหาคู่สำหรับโทร</h1>
-        <p id="statusMessage">โปรดรอสักครู่ ระบบกำลังค้นหาคู่ให้คุณ...</p>
+        <h1>Random</h1>
+        <p id="statusMessage">We will find your friend, wait for few minute...</p>
         <div class="loading" id="spinner">
             <div class="spinner"></div>
         </div>
-        <button class="btn" id="actionButton">ยกเลิก</button>
+        <button class="btn" id="actionButton">cancle</button>
     </div>
     <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
     <script>
@@ -28,8 +28,8 @@
         function startPairing() {
             socket = io("https://webrtc-deploy.onrender.com", { transports: ["websocket"] });
             pairingActive = true;
-            statusMessage.innerText = "โปรดรอสักครู่ ระบบกำลังค้นหาคู่ให้คุณ...";
-            actionButton.innerText = "ยกเลิก";
+            statusMessage.innerText = "We will find your friend, wait for few minute...";
+            actionButton.innerText = "cancle";
             spinner.style.display = "block";
             spinner.style.animation = "spin 1s linear infinite";
             statusMessage.classList.remove("paired");
@@ -46,14 +46,14 @@
                         redirectToCall();
                     }
                 } else {
-                    alert("เกิดข้อผิดพลาดในการจับคู่: " + response.message);
+                    alert("Error: " + response.message);
                 }
             });
 
             socket.on("room-ready", (roomId) => {
                 if (roomId === room) {
                     console.log("Room is ready:", roomId);
-                    statusMessage.innerText = "จับคู่สำเร็จ! กำลังเชื่อมต่อ...";
+                    statusMessage.innerText = "Found your friend! Connecting...";
                     statusMessage.classList.add("paired");
                     spinner.style.animation = "fadeOut 1s forwards";
                     setTimeout(() => {
@@ -64,9 +64,9 @@
 
             socket.on("room-timeout", (roomId) => {
                 if (roomId === room) {
-                    statusMessage.innerText = "จับคู่ไม่ได้ในเวลาที่กำหนด กรุณาลองใหม่อีกครั้ง";
+                    statusMessage.innerText = "No one is available right now, please try again later.";
                     spinner.style.animation = "fadeOut 1s forwards";
-                    actionButton.innerText = "เริ่มใหม่";
+                    actionButton.innerText = "start";
                     pairingActive = false;
                 }
             });

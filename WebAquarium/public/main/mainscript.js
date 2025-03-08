@@ -30,7 +30,7 @@ tagTab.addEventListener("click", () => {
 // Start Button Functionality - just navigate without an alert
 startButton.addEventListener("click", () => {
   // Navigate directly to the random.html page
-  window.location.href = "../webpage/rtcpage/random.html";
+  window.location.href = "../webpage/rtcpage/pages/pairing.html";
 });
 
 // Profile Modal Functionality

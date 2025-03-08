@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pairing - Waiting Room</title>
+  <link rel="stylesheet" href="../css/pairing.css">
+</head>
+<body>
+  <div class="container">
+    <h1>กำลังค้นหาคู่สำหรับโทร</h1>
+    <p id="statusMessage">โปรดรอสักครู่ ระบบกำลังค้นหาคู่ให้คุณ...</p>
+    <div class="loading" id="spinner">
+      <div class="spinner"></div>
+    </div>
+    <button class="btn" id="actionButton">ยกเลิก</button>
+  </div>
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script type="module" src="../js/pairing.js"></script>
+</body>
+</html>

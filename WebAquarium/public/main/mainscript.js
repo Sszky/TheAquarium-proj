@@ -34,13 +34,32 @@ startButton.addEventListener("click", () => {
 });
 
 // Profile Modal Functionality
-profileIcon.addEventListener("click", () => {
+profileIcon.addEventListener("click", (e) => {
+  e.stopPropagation(); // Prevent event from bubbling up
   profileModal.classList.remove("hidden");
+  document.body.style.overflow = "hidden"; // Prevent scrolling while modal is open
 });
 
 closeProfileModal.addEventListener("click", () => {
   profileModal.classList.add("hidden");
+  document.body.style.overflow = ""; // Restore scrolling
 });
+
+// Close modal when clicking outside the modal content
+window.addEventListener("click", (event) => {
+  if (event.target === profileModal) {
+    profileModal.classList.add("hidden");
+    document.body.style.overflow = ""; // Restore scrolling
+  }
+});
+
+// Prevent clicks inside modal from closing it
+const profileCard = document.querySelector(".profile-card");
+if (profileCard) {
+  profileCard.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+}
 
 saveProfileButton.addEventListener("click", () => {
   const accountName = document.getElementById("account").value;
@@ -48,6 +67,7 @@ saveProfileButton.addEventListener("click", () => {
     alert("Profile saved successfully!");
     // Here you would typically save the profile data to your backend
     profileModal.classList.add("hidden");
+    document.body.style.overflow = ""; // Restore scrolling
   } else {
     alert("Please enter an account name");
   }
@@ -58,6 +78,7 @@ logoutButton.addEventListener("click", () => {
   alert("Logged out successfully");
   // You might want to redirect to a login page or clear session data
   profileModal.classList.add("hidden");
+  document.body.style.overflow = ""; // Restore scrolling
 });
 
 // Character Selection Functionality
@@ -182,20 +203,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  
-  // Close profile modal when clicking outside of it
-  window.addEventListener("click", (event) => {
-    if (event.target === profileModal) {
-      profileModal.classList.add("hidden");
-    }
-  });
-
-  profileIcon.addEventListener("click", () => {
-    profileModal.classList.remove("hidden");
-  });
-  
-  closeProfileModal.addEventListener("click", () => {
-    profileModal.classList.add("hidden");
-  });
-  
 });

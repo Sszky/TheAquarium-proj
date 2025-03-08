@@ -339,6 +339,28 @@ body {
   display: none;
 }
 
+/* Add or update these styles in your indexmain.css file */
+
+#profileModal {
+  z-index: 9999; /* Ensure it's above everything else */
+}
+
+.profile-card {
+  z-index: 10000; /* Even higher z-index for the card itself */
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+#closeProfileModal {
+  cursor: pointer;
+}
+
+body.modal-open {
+  overflow: hidden; /* Prevents scrolling when modal is open */
+}
+
 .handlee {
   font-family: "Handlee", cursive;
 }

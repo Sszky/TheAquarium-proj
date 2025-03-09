@@ -1251,7 +1251,7 @@ background-size: cover;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   position: fixed;
   overflow: hidden;
-  top: 50%;
+  top: 55%;
   left: 50%;
   width: 768px;
   max-width: 100%;
@@ -1267,8 +1267,8 @@ background-size: cover;
 }
 
 .container p {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 30px;
+  line-height: 10px;
   letter-spacing: 0.3px;
   margin: 20px 0;
 }

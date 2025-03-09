@@ -12,8 +12,8 @@ const actionButton = document.getElementById("actionButton");
 function startPairing() {
   socket = io(SIGNALING_SERVER_URL, { transports: ["websocket"] });
   pairingActive = true;
-  statusMessage.innerText = "โปรดรอสักครู่ ระบบกำลังค้นหาคู่ให้คุณ...";
-  actionButton.innerText = "ยกเลิก";
+  statusMessage.innerText = "Please wait a moment. The system is finding a match for you...";
+  actionButton.innerText = "Cancel";
   spinner.style.display = "block";
   spinner.style.animation = "spin 1s linear infinite";
   statusMessage.classList.remove("paired");
@@ -78,10 +78,10 @@ function cancelPairing() {
 
 startPairing();
 
-actionButton.onclick = () => {
+actionButton.addEventListener("click", () => {
   if (pairingActive) {
     cancelPairing();
   } else {
     startPairing();
   }
-};
+});

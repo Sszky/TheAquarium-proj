@@ -87,22 +87,23 @@ const selectedCharacter = document.getElementById("selectedCharacter");
 
 // Set default image initially
 if (selectedCharacter) {
-  selectedCharacter.src = "/new/Jelly1.gif";
+  selectedCharacter.src = "logo/Jelly1.gif";
   selectedCharacter.style.width = "150px";
   selectedCharacter.style.height = "150px";
 }
 
 characterIcons.forEach((icon) => {
-  icon.dataset.originalSrc = icon.src;
+  const originalSrc = icon.src;
+  const hoverSrc = icon.getAttribute("data-hover-src");
 
   icon.addEventListener("mouseenter", () => {
-    if (icon.dataset.hoverSrc) {
-      icon.src = icon.dataset.hoverSrc;
+    if (hoverSrc) {
+      icon.src = hoverSrc;
     }
   });
 
   icon.addEventListener("mouseleave", () => {
-    icon.src = icon.dataset.originalSrc;
+    icon.src = originalSrc;
   });
 
   icon.addEventListener("click", () => {

@@ -29,6 +29,11 @@ body {
     margin-top: 20px;
 }
 
+.btn:hover {
+    background-color: #272A7B;
+    color: #fff;
+}
+
 .loading {
     margin-top: 20px;
 }

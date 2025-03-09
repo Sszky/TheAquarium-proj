@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aquarium Interaction</title>
+  <title>The Aquarium</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Poppins:wght@400;600&display=swap"
     rel="stylesheet" />
@@ -15,13 +15,13 @@
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar">
-    <a href="/WebAquarium/public/main/Main.html"><img src="../logo/Logo1.png" alt="Whale Logo" class="nav-logo" /></a>
-    <img id="profileIcon" src="../logo/Profile.png" alt="Fish Icon" class="nav-icon cursor-pointer" />
+    <a href="../main/Main.html"><img src="logo/Logo1.png" alt="Whale Logo" class="nav-logo" /></a>
+    <img id="profileIcon" src="logo/Profile.png" alt="Fish Icon" class="nav-icon cursor-pointer" />
   </nav>
 
   <div class="container">
-    <div class="left-section">
-      <h1 class="title">AQUA<br />RIUM</h1>
+    <div class="left-section text-center">
+      <h1 class="title font-bold drop-shadow-lg">AQUA<br />RIUM</h1>
       <div class="intro">
         <p class="handlee text-xl">
           Hello, I'm <input type="text" placeholder="Your name" class="name-input" />
@@ -30,15 +30,15 @@
 
       <!-- New Character Display Screen -->
       <div class="character-display">
-        <img id="selectedCharacter" src="../logo/Jellypic.png" alt="Selected Character" class="selected-character" />
+        <img id="selectedCharacter" src="logo/Jellypic.png" alt="Selected Character" class="selected-character" />
       </div>
 
       <div class="character-bar">
-        <img src="../logo/Jellypic.png" data-hover-src="../logo/Jelly.gif" alt="Jellyfish" class="character-icon"
+        <img src="logo/Jellypic.png" data-hover-src="logo/Jelly.gif" alt="Jellyfish" class="character-icon"
           data-character="jellyfish" />
-        <img src="../logo/Whalepic .png" data-hover-src="../logo/Whale.gif" alt="Dolphin" class="character-icon"
+        <img src="logo/Whalepic .png" data-hover-src="logo/Whale.gif" alt="Dolphin" class="character-icon"
           data-character="dolphin" />
-        <img src="../logo/Turtlepic .png" data-hover-src="../logo/Turtle.gif" alt="Turtle" class="character-icon"
+        <img src="logo/Turtlepic .png" data-hover-src="logo/Turtle.gif" alt="Turtle" class="character-icon"
           data-character="turtle" />
       </div>
     </div>
@@ -48,12 +48,12 @@
       <div class="card">
         <div class="tabs">
           <button id="swimTab" class="tab tab-active">SWIM</button>
-          <button id="tagTab" class="tab">TAG</button>
+          <button id="tagTab" class="tab tab-inactive">TAG</button>
         </div>
 
         <!-- Swim Content -->
         <div id="swimContent" class="content">
-          <img src="../logo/Untitled_Artwork.png" class="content-img" />
+          <img src="logo/Untitled_Artwork.png" class="content-img" />
           <p class="content-text">
             Do you find someone to talk to? If the answer is yes, just click
             START to start your friendships with someone who you want to.
@@ -64,7 +64,7 @@
         <!-- Tag Content -->
         <div id="tagContent" class="content hidden">
           <p class="content-text">
-            Explore different tags and find people with similar interests!
+            Add your tags and find people with similar interests!
           </p>
 
           <!-- Search bar for tags -->

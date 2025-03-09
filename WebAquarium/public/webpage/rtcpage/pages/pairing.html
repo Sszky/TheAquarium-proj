@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pairing - Waiting Room</title>
+  <title>The Aquarium</title>
   <link rel="stylesheet" href="../css/pairing.css">
 </head>
 <body>
   <div class="container">
-    <h1>กำลังค้นหาคู่สำหรับโทร</h1>
-    <p id="statusMessage">โปรดรอสักครู่ ระบบกำลังค้นหาคู่ให้คุณ...</p>
+    <h1>Searching for a match to call</h1>
+    <p id="statusMessage">Please wait a moment. The system is finding a match for you...</p>
     <div class="loading" id="spinner">
       <div class="spinner"></div>
     </div>
-    <button class="btn" id="actionButton">ยกเลิก</button>
+    <a href="../../../main/Main.html"><button class="btn" id="actionButton">Cancel</button></a>
   </div>
   <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
   <script type="module" src="../js/pairing.js"></script>

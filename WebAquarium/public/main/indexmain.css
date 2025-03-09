@@ -55,6 +55,10 @@ body {
   margin-left: 300px;
 }
 
+.left-section h1 {
+  color: #343789;
+}
+
 .title {
   font-size: 5.5rem;
   font-weight: bold;
@@ -163,6 +167,12 @@ body {
   position: relative;
   top: -64px;
   right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  z-index: 998;
+  transition: all 0.3s ease-in-out;
 }
 
 #swimTab {
@@ -225,6 +235,18 @@ body {
   background-color: #272A7B;
   color: white;
   height: 60px;
+}
+
+.tab-active {
+  background-color: #272A7B; /* สีฟ้าเข้ม */
+  color: white;
+  border-bottom: 3px solid #272A7B;
+}
+
+.tab-inactive {
+  background-color: #8391E6; /* สีฟ้าอ่อน */
+  color: white;
+  border-bottom: 3px solid transparent;
 }
 
 /* Content */

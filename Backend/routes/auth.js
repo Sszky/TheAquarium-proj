@@ -1,7 +1,6 @@
 const express = require("express");
 const admin = require("../config/firebaseAdmin");
 const User = require("../models/User");
-
 const router = express.Router();
 
 const verifyFirebaseToken = async (req, res, next) => {
@@ -51,7 +50,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", verifyFirebaseToken, async (req, res) => {
     try {
-        const { uid, email } = req.user;
+        const { uid } = req.user;
         let user = await User.findOne({ uid });
 
         if (!user) {
@@ -65,6 +64,15 @@ router.post("/login", verifyFirebaseToken, async (req, res) => {
     } catch (error) {
         console.error("Login Error:", error);
         res.status(500).json({ message: "servwe error" });
+    }
+});
+
+router.get("/verify", verifyFirebaseToken, async (req, res) => {
+    try {
+        res.status(200).json({ valid: true });
+    } catch (error) {
+        console.error("Token verification error:", error);
+        res.status(401).json({ valid: false });
     }
 });
 

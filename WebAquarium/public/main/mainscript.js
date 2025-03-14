@@ -1,18 +1,42 @@
-// Tab Switching Functionality
+import { setupUIForAuthState, isUserLoggedIn, getUserData } from "../webpage/rtcpage/js/authUtils.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+
 const swimTab = document.getElementById("swimTab");
 const tagTab = document.getElementById("tagTab");
 const swimContent = document.getElementById("swimContent");
 const tagContent = document.getElementById("tagContent");
 const startButton = document.getElementById("startButton");
 
-// Profile Modal Elements
 const profileIcon = document.getElementById("profileIcon");
 const profileModal = document.getElementById("profileModal");
 const closeProfileModal = document.getElementById("closeProfileModal");
 const saveProfileButton = document.getElementById("saveProfileButton");
 const logoutButton = document.getElementById("logoutButton");
+let userLoggedIn = false;
 
-// Tab Switching
+document.addEventListener("DOMContentLoaded", async () => {
+  const profileCard = document.querySelector(".profile-card");
+  if (profileCard) {
+    if (!document.getElementById("profileAuthStatus")) {
+      const statusElement = document.createElement("p");
+      statusElement.id = "profileAuthStatus";
+      statusElement.className = "mt-2 text-center";
+      profileCard.insertBefore(statusElement, profileCard.querySelector("button"));
+    }
+  }
+
+  await setupUIForAuthState();
+
+  userLoggedIn = await isUserLoggedIn();
+
+  if (userLoggedIn) {
+    const userData = await getUserData();
+    if (userData && document.getElementById("account")) {
+      document.getElementById("account").value = userData.username;
+    }
+  }
+});
+
 swimTab.addEventListener("click", () => {
   swimTab.classList.add("tab-active");
   tagTab.classList.remove("tab-active");
@@ -27,33 +51,42 @@ tagTab.addEventListener("click", () => {
   swimContent.classList.add("hidden");
 });
 
-// Start Button Functionality - just navigate without an alert
-startButton.addEventListener("click", () => {
-  // Navigate directly to the random.html page
-  window.location.href = "../webpage/rtcpage/pages/pairing.html";
+startButton.addEventListener("click", async () => {
+  userLoggedIn = await isUserLoggedIn();
+
+  if (userLoggedIn) {
+    window.location.href = "../webpage/rtcpage/pages/pairing.html";
+  } else {
+    const confirmed = confirm("คุณยังไม่ได้เข้าสู่ระบบ ต้องการเข้าสู่ระบบก่อนหรือไม่? (ถ้าไม่ คุณจะไม่สามารถบันทึกการสนทนาและข้อมูลได้)");
+    if (confirmed) {
+      window.location.href = "../index.html";
+    } else {
+      window.location.href = "../webpage/rtcpage/pages/pairing.html";
+    }
+  }
 });
 
-// Profile Modal Functionality
-profileIcon.addEventListener("click", (e) => {
-  e.stopPropagation(); // Prevent event from bubbling up
+profileIcon.addEventListener("click", async (e) => {
+  e.stopPropagation();
+
+  await setupUIForAuthState();
+
   profileModal.classList.remove("hidden");
-  document.body.style.overflow = "hidden"; // Prevent scrolling while modal is open
+  document.body.style.overflow = "hidden";
 });
 
 closeProfileModal.addEventListener("click", () => {
   profileModal.classList.add("hidden");
-  document.body.style.overflow = ""; // Restore scrolling
+  document.body.style.overflow = "";
 });
 
-// Close modal when clicking outside the modal content
 window.addEventListener("click", (event) => {
   if (event.target === profileModal) {
     profileModal.classList.add("hidden");
-    document.body.style.overflow = ""; // Restore scrolling
+    document.body.style.overflow = "";
   }
 });
 
-// Prevent clicks inside modal from closing it
 const profileCard = document.querySelector(".profile-card");
 if (profileCard) {
   profileCard.addEventListener("click", (e) => {
@@ -61,31 +94,59 @@ if (profileCard) {
   });
 }
 
-saveProfileButton.addEventListener("click", () => {
+saveProfileButton.addEventListener("click", async () => {
   const accountName = document.getElementById("account").value;
+
+  if (!(await isUserLoggedIn())) {
+    alert("กรุณาเข้าสู่ระบบก่อนบันทึกข้อมูล");
+    return;
+  }
+
   if (accountName.trim() !== "") {
-    alert("Profile saved successfully!");
-    // Here you would typically save the profile data to your backend
-    profileModal.classList.add("hidden");
-    document.body.style.overflow = ""; // Restore scrolling
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://webrtc-deploy.onrender.com/api/user/update-profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ username: accountName })
+      });
+
+      if (response.ok) {
+        alert("บันทึกข้อมูลเรียบร้อย");
+        profileModal.classList.add("hidden");
+        document.body.style.overflow = "";
+      } else {
+        const error = await response.json();
+        alert("เกิดข้อผิดพลาด: " + error.message);
+      }
+    } catch (error) {
+      alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+    }
   } else {
-    alert("Please enter an account name");
+    alert("กรุณาระบุชื่อบัญชี");
   }
 });
 
-logoutButton.addEventListener("click", () => {
-  // Add your logout logic here
-  alert("Logged out successfully");
-  // You might want to redirect to a login page or clear session data
+logoutButton.addEventListener("click", async () => {
+  if (await isUserLoggedIn()) {
+    localStorage.removeItem("token");
+    const auth = getAuth();
+    await signOut(auth);
+    alert("ออกจากระบบเรียบร้อย");
+    window.location.href = "../index.html";
+  } else {
+    alert("คุณยังไม่ได้เข้าสู่ระบบ");
+  }
   profileModal.classList.add("hidden");
-  document.body.style.overflow = ""; // Restore scrolling
+  document.body.style.overflow = "";
 });
 
-// Character Selection Functionality
 const characterIcons = document.querySelectorAll(".character-icon");
 const selectedCharacter = document.getElementById("selectedCharacter");
 
-// Set default image initially
 if (selectedCharacter) {
   selectedCharacter.src = "logo/Jelly1.gif";
   selectedCharacter.style.width = "150px";
@@ -109,33 +170,32 @@ characterIcons.forEach((icon) => {
   icon.addEventListener("click", () => {
     console.log("Character clicked:", icon.dataset.character);
 
-    // Set selected character to hover version if available
-    if (selectedCharacter) {
-      selectedCharacter.src = icon.dataset.hoverSrc || icon.dataset.originalSrc;
-      selectedCharacter.alt = icon.alt;
+    const characterData = {
+      type: icon.dataset.character,
+      name: icon.alt,
+      gifSrc: icon.getAttribute("data-hover-src")
+    };
 
-      // Set size dynamically
+    localStorage.setItem("selectedCharacter", JSON.stringify(characterData));
+    console.log("Character saved:", characterData);
+
+    if (selectedCharacter) {
+      selectedCharacter.src = characterData.gifSrc;
+      selectedCharacter.alt = characterData.name;
       selectedCharacter.style.width = "150px";
       selectedCharacter.style.height = "150px";
-
-      // Force reload
-      selectedCharacter.onload = () => console.log("Image loaded successfully");
-      selectedCharacter.onerror = () => console.error("Image failed to load", selectedCharacter.src);
     }
 
-    // Highlight selected character
     characterIcons.forEach((c) => (c.style.border = ""));
     icon.style.border = "3px solid #272A7B";
   });
 });
 
-// Tag Selection Functionality
 document.addEventListener("DOMContentLoaded", function () {
-  // Select first character by default when page loads
   if (characterIcons.length > 0) {
     characterIcons[0].click();
   }
-  
+
   const tagSearchInput = document.getElementById("tagSearchInput");
   const addTagButton = document.getElementById("addTagButton");
   const selectedTagsContainer = document.getElementById("selectedTags");
@@ -198,7 +258,6 @@ document.addEventListener("DOMContentLoaded", function () {
     saveButton.addEventListener("click", function () {
       if (selectedTags.length > 0) {
         alert(`Tags saved: ${selectedTags.join(", ")}`);
-        // Here you could add code to store the tags or navigate to another page
       } else {
         alert("Please select at least one tag to save!");
       }

@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Aquarium</title>
   <link rel="stylesheet" href="../css/webrtc.css">
 </head>
+
 <body>
   <header>
-    <a href="/TheAquarium-proj/WebAquarium/public/main/Main.html"><img src="/TheAquarium-proj/WebAquarium/public/home/new/Logo (1).png" alt="Whale Logo" class="nav-logo" /></a>
+    <a href="/TheAquarium-proj/WebAquarium/public/main/Main.html"><img src="../../../logo/Logo1.png" alt="Whale Logo"
+        class="nav-logo" /></a>
   </header>
   <main>
-    <div id="videos">
-      <div class="video-container">
-          <video id="localVideo" autoplay playsinline muted></video>
-          <div id="localPlaceholder" class="video-placeholder">🐳</div>
+    <div id="video-container">
+
+      <div id="remote-container">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <div id="remotePlaceholder" class="video-placeholder">
+          <img id="remoteCharacterImg" alt="Character" class="character-img">
+        </div>
       </div>
-      <div class="video-container">
-          <video id="remoteVideo" autoplay playsinline></video>
-          <div id="remotePlaceholder" class="video-placeholder">👋</div>
+
+      <div id="local-container">
+        <video id="localVideo" autoplay playsinline muted></video>
+        <div id="localPlaceholder" class="video-placeholder">
+          <img id="localCharacterImg" alt="Character" class="character-img">
+        </div>
       </div>
-  </div>
+      
+    </div>
     <div class="buttons">
       <button id="toggleCamera">Turn Camera On</button>
       <button id="nextCall">Next</button>
@@ -30,4 +40,5 @@
   <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
   <script type="module" src="../js/webrtc.js"></script>
 </body>
+
 </html>

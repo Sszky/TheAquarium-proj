@@ -50,7 +50,7 @@ function initSockets(server) {
       console.log(`User ${socket.id} in room ${room}`);
       const clients = io.sockets.adapter.rooms.get(room);
       if (clients && clients.size >= 2) {
-         io.to(room).emit("room-ready", room);
+        io.to(room).emit("room-ready", room);
       }
     });
 

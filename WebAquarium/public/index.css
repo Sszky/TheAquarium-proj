@@ -5,6 +5,24 @@
       "Source Han Sans CN", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 200;
+  background: transparent;
+  padding-bottom: 15px;
+}
+
 .main-container {
   overflow: hidden;
 }
@@ -24,6 +42,7 @@ button {
 body {
   margin: 0;
   background: linear-gradient(180deg, #ffffff, #d7ebff,#8CBFF2,#6276A3,#244566);
+  transition: background 1s ease-in-out;
 }
 
 .main-container {
@@ -1066,6 +1085,20 @@ background-size: cover;
   padding: 0;
   z-index: 78;
 }
+
+/* Fade-in Animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* navigation setting  */
 .navigation a {
   position: relative;
   font-size: 1.1em;
@@ -1102,8 +1135,8 @@ background-size: cover;
   left: 1096px;
   color: #000000;
   font-family: Space Grotesk, var(--default-font-family);
-  font-size: 28px;
-  font-weight: 400;
+  font-size: 1.1em;
+  font-weight: 500;
   line-height: 28px;
   text-align: left;
   white-space: nowrap;
@@ -1119,8 +1152,8 @@ background-size: cover;
   left: 923px;
   color: #000000;
   font-family: Space Grotesk, var(--default-font-family);
-  font-size: 28px;
-  font-weight: 400;
+  font-size: 1.1em;
+  font-weight: 500;
   line-height: 28px;
   text-align: left;
   white-space: nowrap;
@@ -1141,7 +1174,7 @@ background-size: cover;
   outline: none;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 1.1em;
   text-align: center;
   color: black;
   font-family: Space Grotesk, var(--default-font-family);
@@ -1155,8 +1188,6 @@ background-size: cover;
   background: black;
   color: white;
 }
-
-
 
 .img-4 img{
   position: absolute;
@@ -1200,4 +1231,254 @@ background-size: cover;
   line-height: 28.072px;
   text-align: justified;
   z-index: 82;
+}
+
+/* Homepage & Login Keyframe */
+.data {
+  transform: scale(1);
+}
+
+.data .hidden {
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.container {
+  display: none;
+  opacity: 0;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: fixed;
+  overflow: hidden;
+  top: 55%;
+  left: 50%;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.container.active-popup {
+  display: flex;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.container p {
+  font-size: 30px;
+  line-height: 10px;
+  letter-spacing: 0.3px;
+  margin: 20px 0;
+}
+
+.container span {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.container a {
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  margin: 15px 0 10px;
+}
+
+.container button {
+  background-color: #315294;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.container button.hidden {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+.container form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.container input {
+  background-color: #eee;
+  border: none;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+  margin-top: 10px;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.container.active .sign-in {
+  transform: translateX(100%);
+}
+
+.sign-up {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: move 0.6s;
+}
+
+@keyframes move {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.toggle-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  border-radius: 150px 0 0 100px;
+  z-index: 1000;
+}
+
+.container.active .toggle-container {
+  transform: translateX(-100%);
+  border-radius: 0 150px 100px 0;
+}
+
+.toggle {
+  background-color: #26437d;
+  height: 100%;
+  background: linear-gradient(to right, #627fd3, #2b4883);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle {
+  transform: translateX(50%);
+}
+
+.toggle-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.toggle-left {
+  transform: translateX(-200%);
+}
+
+.container.active .toggle-left {
+  transform: translateX(0);
+}
+
+.toggle-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.container.active .toggle-right {
+  transform: translateX(200%);
+}
+
+.toggle-panel h1 {
+  left: 50%;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.toggle-panel p {
+  left: 50%;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  max-width: 75%;
+  line-height: 1.5;
+}
+
+.toggle-panel button {
+  cursor: pointer;
+  transition: .5s;
+}
+
+.toggle-panel button:hover {
+  background-color: #fff;
+  color: #315294;
+}
+
+/* Scroll to Top Button */
+#scrollToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#scrollToTop.show {
+  opacity: 1;
+  visibility: visible;
 }
